@@ -8,7 +8,7 @@ module.exports.isAdmin = (req, res, next) => {
         res.status(401).json({ message: 'Unauthorized' });
         return;
     }
-    const token = req.headers.cookie.split('=')[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, config.jwtSecretKey);
     userModel.findById(decodedToken._id)
         .then(user => {
