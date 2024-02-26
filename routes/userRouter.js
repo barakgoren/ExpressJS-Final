@@ -15,13 +15,6 @@ router.get('/', isAdmin, (req, res) => {
         .catch(err => res.status(404).json(err))
 });
 
-router.get('/myTasks', isAuth, (req, res) => {
-    UserModel
-        .findById(req.userId).populate('tasks')
-        .then(result => res.status(200).json(result))
-        .catch(err => res.status(404).json(err));
-});
-
 //--------------------------------------- Posts -----------------------------------------------------
 router.post('/', async (req, res) => {
     req.body.password = await bcrypt.hash(req.body.password.toString(), 8);
@@ -54,20 +47,6 @@ router.post('/login', async (req, res) => {
 });
 
 //--------------------------------------- Puts -----------------------------------------------------
-router.post('/newTask', isAuth, (req, res) => {
-    console.log(req.body);
-    const task = new TaskModel(req.body);
-    task.save()
-        .then(result => {
-            req.body.taskId = result._id;
-            UserModel
-                .findByIdAndUpdate(req.userId, { $push: { tasks: req.body.taskId } }, { new: true })
-                .then(result => res.status(200).json(result))
-                .catch(err => res.status(404).json(err));
-        })
-        .catch(err => res.status(401).json(err));
-});
-
 
 
 module.exports = router;

@@ -4,11 +4,12 @@ const { config } = require('../config/secret');
 let counter = 0;
 
 module.exports.isAdmin = (req, res, next) => {
-    if(!req.headers.cookie) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    if(!token) {
         res.status(401).json({ message: 'Unauthorized' });
         return;
     }
-    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, config.jwtSecretKey);
     userModel.findById(decodedToken._id)
         .then(user => {
