@@ -34,15 +34,30 @@ npm start
 
 ### 🚹 User Routes
 
-- `Soon`: Soon.
+Type| Route | Prerequisites | Description
+----| -------- | -------- | ---------
+| <span style="color:#00FF00">GET</span>  |`/users`| ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000) | Get all the users
+| <span style="color:Orange">POST</span>  | `/users` | | Create new user  
+| <span style="color:Orange">POST</span> | `/users/login` | | Log in to an existing user - Getting a token back
 
 ### 📝 Task Routes
 
-- `Soon`: Soon.
+Type| Route | Prerequisites | Description
+----| -------- | -------- | ---------
+| <span style="color:#00FF00">GET</span>  |`/tasks/myTasks`| ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Get the tasks of the current user.
+| <span style="color:Orange">POST</span>  | `/tasks/newTask` | ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Create new task. |
+<span style="color:#FF6B6B">DELETE</span> | `/tasks/deleteTask/:id` | ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Delete an existing task by its ID.
+<span style="color:#008BFF">PUT</span> | `/tasks/updateTask/:id` | ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Updating an existing task by its ID.
+
 
 ### 🏷️ Category Routes
+Type| Route | Prerequisites | Description
+----| -------- | -------- | ---------
+| <span style="color:#00FF00">GET</span>  |`/categories/:id`| ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Get the categories of the tasks by its ID
+<span style="color:Orange">POST</span>  |`/categories`|  ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000)| Create a new category
 
-- `Soon`: Soon.
+
+
 
 ## 🤝 Contributing
 
