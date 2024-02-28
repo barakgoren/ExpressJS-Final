@@ -8,13 +8,13 @@ const CategoryModel = require('../models/categoryModel');
 
 //--------------------------------------- Gets -----------------------------------------------------
 router.get('/myTasks', isAuth, (req, res) => {
-    TaskModel.find({ authorId: req.userId }).populate('category')
+    TaskModel.find({ authorId: req.userId }).populate('category').populate('authorId')
         .then(result => res.status(200).json(result))
         .catch(err => res.status(401).json(err));
 });
 
 //--------------------------------------- Posts -----------------------------------------------------
-router.post('/newTask', isAuth, async (req, res) => {
+router.post('/', isAuth, async (req, res) => {
     try {
         const category = await CategoryModel.findOne({ name: req.body.category });
         if (!category) {
@@ -40,7 +40,7 @@ router.post('/newTask', isAuth, async (req, res) => {
         res.status(200).json({ Msg: "Task Added", Tasks: user.tasks });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: err.message });
     }
 });
 

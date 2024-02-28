@@ -36,7 +36,7 @@ npm start
 
 Type| Route | Prerequisites | Description
 ----| -------- | -------- | ---------
-| ![Badge](https://img.shields.io/badge/GET-0) |`/users`| ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000) | Get all the users
+| ![Badge](https://img.shields.io/badge/GET-0) | `/users`| ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000) | Get all the users
 | ![Badge](https://img.shields.io/badge/POST-FFA600)  | `/users` | | Create new user  
 | ![Badge](https://img.shields.io/badge/POST-FFA600) | `/users/login` | | Log in to an existing user - Getting a token back
 
