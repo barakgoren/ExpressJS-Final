@@ -6,6 +6,8 @@ const TaskModel = require('../models/tasksModel');
 const UserModel = require('../models/userModel');
 const CategoryModel = require('../models/categoryModel');
 
+// this is a test
+
 //--------------------------------------- Gets -----------------------------------------------------
 router.get('/myTasks', isAuth, (req, res) => {
     TaskModel.find({ authorId: req.userId }).populate('category')
@@ -43,6 +45,9 @@ router.post('/newTask', isAuth, async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+// this is a test
+
 
 //--------------------------------------- Delets -----------------------------------------------------
 router.delete('/deleteTask/:id', isAuth, (req, res) => {
