@@ -55,6 +55,8 @@ Type| Route | Prerequisites | Description
 ----| -------- | -------- | ---------
 | ![Badge](https://img.shields.io/badge/GET-0)  |`/categories/:id`| ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Get the categories of the tasks by its ID
 ![Badge](https://img.shields.io/badge/POST-FFA600) |`/categories`|  ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000)| Create a new category
+![Badge](https://img.shields.io/badge/DELETE-FF6B6B) |`/categories/:id`|  ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000)| Delete a category
+![Badge](https://img.shields.io/badge/PUT-008BFF) |`/categories/:id`|  ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000)| Update a category
 
 
 
