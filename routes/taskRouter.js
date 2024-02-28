@@ -48,7 +48,6 @@ router.post('/newTask', isAuth, async (req, res) => {
 
 // this is a test
 
-
 //--------------------------------------- Delets -----------------------------------------------------
 router.delete('/deleteTask/:id', isAuth, (req, res) => {
     UserModel
