@@ -8,15 +8,17 @@ const CategoryModel = require('../models/categoryModel');
 
 // this is a test
 
+router.use(isAuth);
+
 //--------------------------------------- Gets -----------------------------------------------------
-router.get('/myTasks', isAuth, (req, res) => {
-    TaskModel.find({ authorId: req.userId }).populate('category').populate('authorId')
+router.get('/', (req, res) => {
+    TaskModel.find({ authorId: req.userId }).populate('category')
         .then(result => res.status(200).json(result))
         .catch(err => res.status(401).json(err));
 });
 
 //--------------------------------------- Posts -----------------------------------------------------
-router.post('/', isAuth, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const category = await CategoryModel.findOne({ name: req.body.category });
         if (!category) {
@@ -49,7 +51,7 @@ router.post('/', isAuth, async (req, res) => {
 // this is a test
 
 //--------------------------------------- Delets -----------------------------------------------------
-router.delete('/deleteTask/:id', isAuth, (req, res) => {
+router.delete('/:id', (req, res) => {
     UserModel
         .findById(req.userId)
         .then(user => {
@@ -70,7 +72,7 @@ router.delete('/deleteTask/:id', isAuth, (req, res) => {
 });
 
 //--------------------------------------- Puts -----------------------------------------------------
-router.put('/updateTask/:id', isAuth, (req, res) => {
+router.patch('/:id', (req, res) => {
     TaskModel.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
         .then(result => res.status(200).json(result))
         .catch(err => res.status(404).json(err));

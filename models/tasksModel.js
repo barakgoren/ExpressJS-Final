@@ -36,7 +36,7 @@ const taskSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
-}, {timestamps: true});
+}, {timestamps: true, versionKey: false} );
 
 // Middleware to handle the "updatedAt" field update
 taskSchema.pre('save', function (next) {

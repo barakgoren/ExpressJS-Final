@@ -44,8 +44,8 @@ Type| Route | Prerequisites | Description
 
 Type| Route | Prerequisites | Description
 ----| -------- | -------- | ---------
-| ![Badge](https://img.shields.io/badge/GET-0)  |`/tasks/myTasks`| ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Get the tasks of the current user.
-| ![Badge](https://img.shields.io/badge/POST-FFA600)  | `/tasks/newTask` | ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Create new task. |
+| ![Badge](https://img.shields.io/badge/GET-0)  |`/tasks`| ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Get the tasks of the current user.
+| ![Badge](https://img.shields.io/badge/POST-FFA600)  | `/tasks` | ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Create new task. |
 ![Badge](https://img.shields.io/badge/DELETE-FF6B6B) | `/tasks/deleteTask/:id` | ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Delete an existing task by its ID.
 ![Badge](https://img.shields.io/badge/PUT-008BFF) | `/tasks/updateTask/:id` | ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Updating an existing task by its ID.
 

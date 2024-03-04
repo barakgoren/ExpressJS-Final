@@ -1,8 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const { isAuth, isAdmin } = require('../utils/auth');
 const CategoryModel = require('../models/categoryModel');
+
+router.get('/', isAuth, (req, res) => {
+    CategoryModel.find()
+        .then(result => res.status(200).json(result))
+        .catch(err => res.status(404).json(err))
+});
 
 //--------------------------------------- Gets -----------------------------------------------------
 router.get('/:id', isAuth, (req, res) => {
@@ -38,7 +43,7 @@ router.delete('/:id', isAdmin, (req, res) => {
 
 //--------------------------------------- Puts -----------------------------------------------------
 
-router.put('/:id', isAdmin, validateUpdateFields, (req, res) => {
+router.patch('/:id', isAdmin, validateUpdateFields, (req, res) => {
     const validFields = Object.keys(CategoryModel.schema.paths); 
     const fields = Object.keys(req.body);
     console.log(fields);
@@ -53,9 +58,7 @@ router.put('/:id', isAdmin, validateUpdateFields, (req, res) => {
 function validateUpdateFields(req, res, next) {
     let validFields = Object.keys(CategoryModel.schema.paths);
     const updateFields = Object.keys(req.body); 
-
     validFields = validFields.filter(field => field !== '_id');
-
     const isValidUpdate = updateFields.every((field) => validFields.includes(field));
 
     if (!isValidUpdate) {
