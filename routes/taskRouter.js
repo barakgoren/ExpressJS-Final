@@ -1,16 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const { isAuth } = require('../utils/auth');
+const { isAuth, isAdmin } = require('../utils/auth');
 const TaskModel = require('../models/tasksModel');
 const UserModel = require('../models/userModel');
 const CategoryModel = require('../models/categoryModel');
 
-// this is a test
-
 //--------------------------------------- Gets -----------------------------------------------------
+router.get('/', isAdmin, (req, res) => {
+    TaskModel.find()
+        .populate('category')
+        .then(result => res.status(200).json(result))
+        .catch(err => res.status(404).json(err));
+});
+
 router.get('/myTasks', isAuth, (req, res) => {
-    TaskModel.find({ authorId: req.userId }).populate('category').populate('authorId')
+    TaskModel.find({ authorId: req.userId })
+        .populate('category')
         .then(result => res.status(200).json(result))
         .catch(err => res.status(401).json(err));
 });
@@ -22,34 +28,26 @@ router.post('/', isAuth, async (req, res) => {
         if (!category) {
             return res.status(400).json({ message: 'Category not found' });
         }
+
         req.body.category = category._id;
+        req.body.authorId = req.userId;
 
         const task = new TaskModel(req.body);
-
         const result = await task.save();
-        req.body.taskId = result._id;
-
-        const user = await UserModel.findByIdAndUpdate(
-            req.userId,
-            { $push: { tasks: req.body.taskId } },
-            { new: true }
-        );
-
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+        
+        if (!result) {
+            return res.status(400).json({ message: "Unauthorized" });
         }
 
-        res.status(200).json({ Msg: "Task Added", Tasks: user.tasks });
+        res.status(200).json({ Msg: "Task Added", newTask: task });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: err.message });
     }
 });
 
-// this is a test
-
 //--------------------------------------- Delets -----------------------------------------------------
-router.delete('/deleteTask/:id', isAuth, (req, res) => {
+router.delete('/:id', isAuth, (req, res) => {
     UserModel
         .findById(req.userId)
         .then(user => {
@@ -70,7 +68,7 @@ router.delete('/deleteTask/:id', isAuth, (req, res) => {
 });
 
 //--------------------------------------- Puts -----------------------------------------------------
-router.put('/updateTask/:id', isAuth, (req, res) => {
+router.patch('/:id', isAuth, (req, res) => {
     TaskModel.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
         .then(result => res.status(200).json(result))
         .catch(err => res.status(404).json(err));

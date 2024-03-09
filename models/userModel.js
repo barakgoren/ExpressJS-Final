@@ -14,11 +14,6 @@ const userSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    tasks: {
-        type: Array,
-        ref: 'Task',
-        default: []
-    },
     role: {
         type: Array,
         default: ["User"]

@@ -13,6 +13,7 @@ This is a RESTful API for a task management application. It allows users to crea
 - Node.js
 - npm
 - MongoDB
+- Nodemon (For dev mode)
 
 ### Installation
 
@@ -24,30 +25,79 @@ git clone https://github.com/barakgoren/ExpressJS-Final.git
 ```bash
 npm install
 ```
-1. Start the server:
+
+### ⚙️ Configuration
+
+- Create a new ".env" file and insert the fields:
+  - JWT_SECRET_KEY - for configuring JWT.
+  - USER_DB - The user name to your Atlas if you are using atlas
+  - PASS_DB - The password to your Atlas if you are using atlas
+  - ADMIN_PASS - This is the password you use to set yourself as an Admin.
+
+- Modify the MongoDB URL to your Atlas URL or local URL on the [app.js](./app.js) file.
+
+
+### Running - Choose step 1 or 2:
+
+1. Start the server with Nodemon on Development mode:
+```bash
+npm run dev
+```
+2. Start the server with Node.js:
 ```bash
 npm start
 ```
-
 
 ## 📚 API Documentation
 
 ### 🚹 User Routes
 
 Type| Route | Prerequisites | Description
-----| -------- | -------- | ---------
+----| -------- | -------- | --------- 
 | ![Badge](https://img.shields.io/badge/GET-0) | `/users`| ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000) | Get all the users
-| ![Badge](https://img.shields.io/badge/POST-FFA600)  | `/users` | | Create new user  
+| ![Badge](https://img.shields.io/badge/GET-0) | `/users/me`| ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Get your user details
+| ![Badge](https://img.shields.io/badge/POST-FFA600)  | `/users` | | Create new user
 | ![Badge](https://img.shields.io/badge/POST-FFA600) | `/users/login` | | Log in to an existing user - Getting a token back
+| ![Badge](https://img.shields.io/badge/PATCH-A35DDC) | `/users/setAdmin/:id` | ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000) | Set a new admin. You can also use it to set yourself an admin by using the "adminPass" attribute on the config.js.
+
+#### 👤 Create new User body:
+
+```json
+{
+    "name": "your name",
+    "email": "yourEmail@gmail.com",
+    "age": 30,
+    "password": "your password"
+}
+```
+
+#### 👤 Login body:
+
+```json
+{
+    "email": "yourEmail@gmail.com",
+    "password": "your password"
+}
+```
 
 ### 📝 Task Routes
 
 Type| Route | Prerequisites | Description
 ----| -------- | -------- | ---------
+| ![Badge](https://img.shields.io/badge/GET-0)  |`/tasks`| ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000) | Get all the tasks
 | ![Badge](https://img.shields.io/badge/GET-0)  |`/tasks/myTasks`| ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Get the tasks of the current user.
-| ![Badge](https://img.shields.io/badge/POST-FFA600)  | `/tasks/newTask` | ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Create new task. |
-![Badge](https://img.shields.io/badge/DELETE-FF6B6B) | `/tasks/deleteTask/:id` | ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Delete an existing task by its ID.
-![Badge](https://img.shields.io/badge/PUT-008BFF) | `/tasks/updateTask/:id` | ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Updating an existing task by its ID.
+| ![Badge](https://img.shields.io/badge/POST-FFA600)  | `/tasks` | ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Create new task. |
+![Badge](https://img.shields.io/badge/DELETE-FF6B6B) | `/tasks/:id` | ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Delete an existing task by its ID.
+![Badge](https://img.shields.io/badge/PATCH-A35DDC) | `/tasks/:id` | ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Updating an existing task by its ID.
+
+#### 📝 Create new Task body:
+
+```json
+{
+    "name": "Task name",
+    "description": "Task description"
+}
+```
 
 
 ### 🏷️ Category Routes
@@ -56,9 +106,16 @@ Type| Route | Prerequisites | Description
 | ![Badge](https://img.shields.io/badge/GET-0)  |`/categories/:id`| ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Get the categories of the tasks by its ID
 ![Badge](https://img.shields.io/badge/POST-FFA600) |`/categories`|  ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000)| Create a new category
 ![Badge](https://img.shields.io/badge/DELETE-FF6B6B) |`/categories/:id`|  ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000)| Delete a category
-![Badge](https://img.shields.io/badge/PUT-008BFF) |`/categories/:id`|  ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000)| Update a category
+![Badge](https://img.shields.io/badge/PATCH-A35DDC) |`/categories/:id`|  ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000)| Update a category
 
+#### 🏷️ Create new Category body:
 
+```json
+{
+    "name": "Category name",
+    "description": "Category description"
+}
+```
 
 
 ## 🤝 Contributing

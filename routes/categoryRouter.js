@@ -5,6 +5,14 @@ const { isAuth, isAdmin } = require('../utils/auth');
 const CategoryModel = require('../models/categoryModel');
 
 //--------------------------------------- Gets -----------------------------------------------------
+
+router.get('/', (req, res) => {
+    CategoryModel
+        .find()
+        .then(result => res.status(200).json(result))
+        .catch(err => res.status(404).json(err))
+});
+
 router.get('/:id', isAuth, (req, res) => {
     CategoryModel.findById(req.params.id)
         .then(result => res.status(200).json(result))
@@ -38,7 +46,7 @@ router.delete('/:id', isAdmin, (req, res) => {
 
 //--------------------------------------- Puts -----------------------------------------------------
 
-router.put('/:id', isAdmin, validateUpdateFields, (req, res) => {
+router.patch('/:id', isAdmin, validateUpdateFields, (req, res) => {
     const validFields = Object.keys(CategoryModel.schema.paths); 
     const fields = Object.keys(req.body);
     console.log(fields);
@@ -50,6 +58,9 @@ router.put('/:id', isAdmin, validateUpdateFields, (req, res) => {
 
 // --------------------------------------- Middlewares -----------------------------------------------------
 
+
+// Functions to get the fields of the model and compare them with the fields of the request
+// to make sure the user also doesnt try to update fields that are not allowed
 function validateUpdateFields(req, res, next) {
     let validFields = Object.keys(CategoryModel.schema.paths);
     const updateFields = Object.keys(req.body); 
