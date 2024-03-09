@@ -35,6 +35,16 @@ npm install
   - ADMIN_PASS - This is the password you use to set yourself as an Admin.
 
 - Modify the MongoDB URL to your Atlas URL or local URL on the [app.js](./app.js) file.
+  #### Example for running locally:
+  ```javascript
+  mongoose.connect(`http://localhost:27017`)
+    .then(() => {
+        console.log('Connected to MongoDB');
+    })
+    .catch(err => {
+        console.log(err);
+    })
+  ```
 
 
 ### Running - Choose step 1 or 2:
