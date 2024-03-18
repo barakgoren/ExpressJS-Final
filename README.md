@@ -1,5 +1,5 @@
 # 📝 Task Management API 
-![Status](https://img.shields.io/badge/Status-Ongoing-yellow)
+![Status](https://img.shields.io/badge/Status-Done-green)
 ![GitHub last commit](https://img.shields.io/github/last-commit/barakgoren/ExpressJS-Final)
 [![wakatime](https://wakatime.com/badge/github/barakgoren/ExpressJS-Final.svg?)](https://wakatime.com/badge/github/barakgoren/ExpressJS-Final)
 
