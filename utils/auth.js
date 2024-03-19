@@ -11,7 +11,7 @@ module.exports.isAdmin = (req, res, next) => {
         return;
     }
     console.log(req.body.adminPass);
-    if(req.body.adminPass && req.body.adminPass === config.adminPass) {
+    if(req.body.adminPass === config.adminPass) {
         console.log('special request');
         req.special = true;
         // remove the adminPass from the request body
@@ -19,6 +19,9 @@ module.exports.isAdmin = (req, res, next) => {
         req.body.adminPass = undefined;
     }
     const decodedToken = jwt.verify(token, config.jwtSecretKey);
+    if(!decodedToken) {
+        res.status(403).json({ message: 'Invalid token.' });
+    }
     userModel.findById(decodedToken._id)
         .then(user => {
             if (user.role.includes('Admin') || req.special) {

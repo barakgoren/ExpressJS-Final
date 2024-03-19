@@ -24,7 +24,8 @@ router.get('/myTasks', isAuth, (req, res) => {
 //--------------------------------------- Posts -----------------------------------------------------
 router.post('/', isAuth, async (req, res) => {
     try {
-        const category = await CategoryModel.findOne({ name: req.body.category });
+        // const category = await CategoryModel.findOne({ name: req.body.category });
+        const category = await CategoryModel.findOne({ _id: req.body.category });
         if (!category) {
             return res.status(400).json({ message: 'Category not found' });
         }

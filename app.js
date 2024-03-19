@@ -20,7 +20,7 @@ app.use('/users', userRouter);
 app.use('/tasks', taskRouter);
 app.use('/categories', categoryRouter);
 // Default route
-app.get('/', (req, res) => { res.send('Welcome to the Tasks API') });
+app.get('/', (req, res) => { res.send('Welcome to the Tasks API by Barak Goren and Michkael Halimi') });
 // 404 route
 app.use('*', (req, res) => {res.status(404).send('Route not exist');});
 

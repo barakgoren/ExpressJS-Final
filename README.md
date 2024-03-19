@@ -3,6 +3,12 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/barakgoren/ExpressJS-Final)
 [![wakatime](https://wakatime.com/badge/github/barakgoren/ExpressJS-Final.svg?)](https://wakatime.com/badge/github/barakgoren/ExpressJS-Final)
 
+## 🔴 Live test
+
+You can check this API live on; [This Link](https://github.com/barakgoren/ExpressJS-Final/issues).
+Use the documentation below.
+
+## 👋 Introduction
 
 This is a RESTful API for a task management application. It allows users to create, read, update, and delete tasks, and associate them with categories.
 
@@ -68,7 +74,7 @@ Type| Route | Prerequisites | Description
 | ![Badge](https://img.shields.io/badge/GET-0) | `/users/me`| ![Badge](https://img.shields.io/badge/Auth%20Required-00FFFF) | Get your user details
 | ![Badge](https://img.shields.io/badge/POST-FFA600)  | `/users` | | Create new user
 | ![Badge](https://img.shields.io/badge/POST-FFA600) | `/users/login` | | Log in to an existing user - Getting a token back
-| ![Badge](https://img.shields.io/badge/PATCH-A35DDC) | `/users/setAdmin/:id` | ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000) | Set a new admin. You can also use it to set yourself an admin by using the "adminPass" attribute on the config.js.
+| ![Badge](https://img.shields.io/badge/PATCH-A35DDC) | `/users/setAdmin/:id` | ![Badge](https://img.shields.io/badge/Admin%20Only-FF0000) | Set a new admin. You can also use it to set yourself an admin by using the "adminPass" attribute on the config.js. Just send an "adminPass" on the body of the PATCH request.
 
 #### 👤 Create new User body:
 
@@ -104,7 +110,9 @@ Type| Route | Prerequisites | Description
 
 ```json
 {
-    "name": "Task name",
+    "title": "Task name",
+    "category": "Category ID",
+    "dueDate": "yyyy-MM-dd",
     "description": "Task description"
 }
 ```
