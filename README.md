@@ -5,8 +5,7 @@
 
 ## 🔴 Live test
 
-You can check this API live on; [This Link](https://github.com/barakgoren/ExpressJS-Final/issues).
-Use the documentation below.
+You can check this API live on this link : https://calm-dress-bear.cyclic.app/
 
 ## 👋 Introduction
 
